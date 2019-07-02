@@ -29,26 +29,6 @@ fun Date.add(value : Int, units : String) : Date {
     return this
 }
 
-// Реализуй extension Date.humanizeDiff(date) (значение по умолчанию текущий момент времени) для форматирования
-// вывода разницы между датами в человекообразном формате, с учетом склонения числительных. Временные интервалы
-// преобразований к человекообразному формату доступны в ресурсах к заданию
-// Пример:
-// Date().add(-2, TimeUnits.HOUR).humanizeDiff() //2 часа назад
-// Date().add(-5, TimeUnits.DAY).humanizeDiff() //5 дней назад
-// Date().add(2, TimeUnits.MINUTE).humanizeDiff() //через 2 минуты
-// Date().add(7, TimeUnits.DAY).humanizeDiff() //через 7 дней
-// Date().add(-400, TimeUnits.DAY).humanizeDiff() //более года назад
-// Date().add(400, TimeUnits.DAY).humanizeDiff() //более чем через год
-// 0с - 1с "только что" +
-// 1с - 45с "несколько секунд назад" +
-// 45с - 75с "минуту назад" +
-// 75с - 45мин "N минут назад" +
-// 45мин - 75мин "час назад" +
-// 75мин 22ч "N часов назад"
-// 22ч - 26ч "день назад"
-// 26ч - 360д "N дней назад"
-// >360д "более года назад" +
-
 fun Date.humanizeDiff() : String {
     val delta = Date().time - this.time
     val minutes = ceil(1.0 * delta.absoluteValue / MINUTE).toInt()
