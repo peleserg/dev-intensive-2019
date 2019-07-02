@@ -16,13 +16,13 @@ fun Date.format(pattern : String = "HH:mm:ss dd.MM.yy") : String {
     return dateFormat.format(this)
 }
 
-fun Date.add(value : Int, units : String) : Date {
+fun Date.add(value : Int, units : TimeUnits) : Date {
     var time = this.time
     time += when (units) {
-        "second", "seconds" -> value * SECOND
-        "minute", "minutes" -> value * MINUTE
-        "hour", "hours" -> value * HOUR
-        "day", "days" -> value * DAY
+        TimeUnits.SECOND -> value * SECOND
+        TimeUnits.MINUTE -> value * MINUTE
+        TimeUnits.HOUR -> value * HOUR
+        TimeUnits.DAY -> value * DAY
         else -> throw IllegalStateException("invalid unit")
     }
     this.time = time
@@ -70,4 +70,11 @@ fun Date.humanizeDiff() : String {
     if (delta > 360 * DAY) return "более года назад"
     if (delta.absoluteValue in 0 .. 1 * SECOND) return deltaString
     return if (delta > 0) "$deltaString назад" else "через $deltaString"
+}
+
+enum class TimeUnits {
+    SECOND,
+    MINUTE,
+    HOUR,
+    DAY
 }
