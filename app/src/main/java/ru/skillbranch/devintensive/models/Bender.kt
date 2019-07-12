@@ -12,18 +12,22 @@ class Bender (var status : Status = Status.NORMAL, var question : Question = Que
     }
 
     fun listenAnswer(answer : String) : Pair<String, Triple<Int, Int, Int>> {
-        return if (question.answers.contains(answer)) {
-            question = question.nextQuestion()
-            "Отлично - ты справился\n${question.question}" to status.color
-        } else {
-            if (status == Status.CRITICAL) {
-                status = Status.NORMAL
-                question = Question.NAME
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+        return if (question.validate(answer)) {
+            if (question.answers.contains(answer.toLowerCase()) || question == Question.IDLE) {
+                question = question.nextQuestion()
+                "Отлично - ты справился\n${question.question}" to status.color
             } else {
-                status = status.nextStatus()
-                "Это неправильный ответ\n${question.question}" to status.color
+                if (status == Status.CRITICAL) {
+                    status = Status.NORMAL
+                    question = Question.NAME
+                    "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                } else {
+                    status = status.nextStatus()
+                    "Это неправильный ответ\n${question.question}" to status.color
+                }
             }
+        } else {
+            "${question.validationMessage}\n${question.question}" to status.color
         }
     }
 
@@ -42,34 +46,33 @@ class Bender (var status : Status = Status.NORMAL, var question : Question = Que
         }
     }
 
-//    Валидация
-//    Question.NAME -> "Имя должно начинаться с заглавной буквы"
-//    Question.PROFESSION -> "Профессия должна начинаться со строчной буквы"
-//    Question.MATERIAL -> "Материал не должен содержать цифр"
-//    Question.BDAY -> "Год моего рождения должен содержать только цифры"
-//    Question.SERIAL -> "Серийный номер содержит только цифры и их 7"
-//    Question.IDLE -> //игнорировать валидацию
-
-    enum class Question (val question : String, val answers : List<String>) {
-        NAME("Как меня зовут?", listOf("бендер", "bender")) {
+    enum class Question (val question : String, val answers : List<String>, val validationMessage : String = "") {
+        NAME("Как меня зовут?", listOf("бендер", "bender"), "Имя должно начинаться с заглавной буквы") {
             override fun nextQuestion(): Question = PROFESSION
+            override fun validate(input : String): Boolean = input.isNotEmpty() && input[0] == input[0].toUpperCase()
         },
-        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
+        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender"), "Профессия должна начинаться со строчной буквы") {
             override fun nextQuestion(): Question = MATERIAL
+            override fun validate(input : String): Boolean = input.isNotEmpty() && input[0] == input[0].toLowerCase()
         },
-        MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {
+        MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood"), "Материал не должен содержать цифр") {
             override fun nextQuestion(): Question = BDAY
+            override fun validate(input : String): Boolean = input.matches(Regex("\\D+"))
         },
-        BDAY("Когда меня создали?", listOf("2993")) {
+        BDAY("Когда меня создали?", listOf("2993"), "Год моего рождения должен содержать только цифры") {
             override fun nextQuestion(): Question = SERIAL
+            override fun validate(input : String): Boolean = input.matches(Regex("\\d+"))
         },
-        SERIAL("Мой серийный номер?", listOf("2716057")) {
+        SERIAL("Мой серийный номер?", listOf("2716057"), "Серийный номер содержит только цифры, и их 7") {
             override fun nextQuestion(): Question = IDLE
+            override fun validate(input : String): Boolean = input.matches(Regex("\\d+")) && input.length == 7
         },
         IDLE("На этом все, вопросов больше нет", listOf()) {
             override fun nextQuestion(): Question = IDLE
+            override fun validate(input : String): Boolean = true
         };
 
         abstract fun nextQuestion() : Question
+        abstract fun validate(input : String) : Boolean
     }
 }
