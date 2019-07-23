@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+        <!--TODO 01-->
+        <!--Верстка ProfileActivity-->
+        <!--Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя
+        способом (LinearLayout/RelativeLayout/ConstraintLayout)-->
+        <!--Сверстай экран профиля пользователя, он должен содержать в себе следующие View:-->
+        <!--Кнопка переключения в режим редактирования (ImageButton) @+id/btn_edit-->
+        <!--Кнопка переключения режима Day/Night (ImageButton) @+id/btn_switch_theme-->
+        <!--Аватар пользователя (ImageView/CircleImageView) @+id/iv_avatar-->
+        <!--Псевдоним (TextView) @+id/tv_nick_name-->
+        <!--Ранг (TextView) @+id/tv_rank-->
+        <!--Рейтинг (TextView) @+id/tv_rating-->
+        <!--Уважение (TextView) @+id/tv_respect-->
+        <!--Имя (EditText) @+id/et_first_name-->
+        <!--Фамилия (EditText) @+id/et_last_name-->
+        <!--О себе (EditText) @+id/et_about-->
+        <!--Обертка над "О себе" (TextInputLayout) @+id/wr_about-->
+        <!--Репозиторий (EditText) @+id/et_repository-->
+        <!--Обертка над "Репозиторий" (TextInputLayout) @+id/wr_repository-->
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.ProfileActivity"
+        android:orientation="vertical"
+        android:gravity="center">
+
+</LinearLayout>

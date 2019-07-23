@@ -1,5 +1,14 @@
 package ru.skillbranch.devintensive.utils
 
+// TODO 06
+// firstName + lastName = nickName
+// Необходимо реализовать преобразование firstName и lastName пользователя в его nickName
+// Реализуй Profile.nickName как вычисляемое свойство из имени и фамилии пользователя, возвращающее значение псевдонима
+// пользователя в виде транслитерированной строки с заменой пробела на "_"
+// Пример:
+// Profile: firsName = "Женя", lastName = "Стереотипов"; Profile.nickName //Zhenya_Stereotipov
+// (Используй реализованный ранее метод Utils.transliteration)
+
 object Utils {
     fun parseFullName(fullName : String?) : Pair<String?, String?> {
         val parts : List<String>? = fullName?.split(" ")
