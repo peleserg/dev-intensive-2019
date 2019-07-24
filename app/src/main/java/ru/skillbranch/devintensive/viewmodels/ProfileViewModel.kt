@@ -1,5 +1,11 @@
 package ru.skillbranch.devintensive.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.repositories.PreferencesRepository
+
 // TODO 07
 // Text Input Layout error
 // Необходимо реализовать вадидацию вводимых пользователем данных в поле @id/et_repository на соответствие url
@@ -44,5 +50,22 @@ package ru.skillbranch.devintensive.viewmodels
 // с фоном colorAccent (c учетом темы) и буквами инициалов (colorWhite) и установи полученное изображение как
 // изображение по умолчанию для профиля пользователя
 
-class ProfileViewModel {
+class ProfileViewModel : ViewModel() {
+    private val repository : PreferencesRepository = PreferencesRepository
+    private val profileData = MutableLiveData<Profile>()
+
+    init {
+        profileData.value = repository.getProfile()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
+
+    fun getProfileData() : LiveData<Profile> = profileData
+
+    fun saveProfileData(profile: Profile) {
+        repository.saveProfile(profile)
+        profileData.value = profile
+    }
 }

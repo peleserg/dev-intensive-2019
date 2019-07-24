@@ -226,7 +226,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4">
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:counterMaxLength="128">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_about"
@@ -278,7 +279,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/ic_eye"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
