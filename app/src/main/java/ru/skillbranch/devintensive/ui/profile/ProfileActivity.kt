@@ -119,16 +119,24 @@ class ProfileActivity : AppCompatActivity() {
             background.colorFilter = filter
             setImageDrawable(icon)
         }
+        if (isEdit) {
+            wr_repository.error = ""
+        }
     }
 
     private fun saveProfileInfo() {
+        val repoIsValid = viewModel.repoIsValid(et_repository.text.toString())
         Profile(
             firstName = et_first_name.text.toString(),
             lastName = et_last_name.text.toString(),
             about = et_about.text.toString(),
-            repository = et_repository.text.toString()
+            repository = if (repoIsValid) et_repository.text.toString() else ""
         ).apply {
             viewModel.saveProfileData(this)
+        }
+        if (!repoIsValid) {
+            wr_repository.error = "Невалидный адрес репозитория"
+            et_repository.setText("")
         }
     }
 }
