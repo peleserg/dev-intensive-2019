@@ -17,7 +17,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
+    <ru.skillbranch.devintensive.ui.custom.CircleImageView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/avatar_round_size"
             android:layout_height="@dimen/avatar_round_size"
@@ -258,8 +258,10 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_repo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider2" app:layout_constraintEnd_toStartOf="@+id/wr_repository"
-            android:layout_marginEnd="16dp" app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+            app:layout_constraintTop_toBottomOf="@+id/divider2"
+            app:layout_constraintEnd_toStartOf="@+id/wr_repository"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
 
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/wr_repository"
@@ -289,4 +291,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/wr_repository"
             app:layout_constraintTop_toTopOf="@+id/wr_repository"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
