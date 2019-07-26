@@ -20,12 +20,6 @@ import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
-// TODO 05
-// SplashTheme
-// Необходимо реализовать тему, отображаемую при загрузке приложения до момента создания Activity
-// Реализуй SplashTheme в соответствии с макетами. Необходимо реализовать ее отображение при запуске приложения до
-// момента создания Activity. Как только Activity будет создана, необходимо установить AppTheme
-
 class ProfileActivity : AppCompatActivity() {
 
     companion object {
@@ -37,7 +31,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // TODO Set theme splash
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
