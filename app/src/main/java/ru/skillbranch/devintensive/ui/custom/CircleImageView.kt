@@ -10,6 +10,8 @@ import ru.skillbranch.devintensive.R
 import kotlin.math.min
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.toColorInt
+import kotlinx.android.synthetic.main.activity_profile.view.*
+import ru.skillbranch.devintensive.utils.Utils
 
 // TODO Initials: https://code.tutsplus.com/tutorials/android-sdk-creating-custom-views--mobile-14548
 class CircleImageView @JvmOverloads constructor(

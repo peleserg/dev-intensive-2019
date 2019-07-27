@@ -1,24 +1,20 @@
 package ru.skillbranch.devintensive.ui.profile
 
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
+import android.graphics.*
+import ru.skillbranch.devintensive.utils.TextDrawable
+import ru.skillbranch.devintensive.utils.Utils
+
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -84,6 +80,7 @@ class ProfileActivity : AppCompatActivity() {
 
         btn_switch_theme.setOnClickListener {
             viewModel.switchTheme()
+            updateUserIcon()
         }
     }
 
@@ -138,5 +135,15 @@ class ProfileActivity : AppCompatActivity() {
             wr_repository.error = "Невалидный адрес репозитория"
             et_repository.setText("")
         }
+        //if (et_first_name.text.toString() != "" || et_last_name.text.toString() != "") {
+            updateUserIcon()
+        //}
+    }
+    private fun updateUserIcon() {
+        val userIcon = TextDrawable(
+            Utils.toInitials(et_first_name.text.toString(), et_last_name.text.toString()) ?: "",
+            resources.getColor(R.color.color_accent, theme),
+            iv_avatar.width.toFloat(), iv_avatar.height.toFloat())
+        iv_avatar.setImageDrawable(userIcon)
     }
 }
