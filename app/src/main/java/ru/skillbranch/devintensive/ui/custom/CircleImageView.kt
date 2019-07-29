@@ -5,15 +5,11 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.annotation.ColorRes
-import androidx.annotation.Dimension
 import ru.skillbranch.devintensive.R
 import kotlin.math.min
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.toColorInt
-import kotlinx.android.synthetic.main.activity_profile.view.*
-import ru.skillbranch.devintensive.utils.Utils
 
-// TODO Initials: https://code.tutsplus.com/tutorials/android-sdk-creating-custom-views--mobile-14548
 class CircleImageView @JvmOverloads constructor(
     context : Context,
     attrs : AttributeSet? = null,
@@ -56,6 +52,8 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+
         val halfWidth = (measuredWidth / 2).toFloat()
         val halfHeight = (measuredHeight / 2).toFloat()
         val radius = min(halfWidth, halfHeight)

@@ -12,6 +12,8 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 import android.graphics.*
+import android.util.TypedValue
+import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.utils.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 
@@ -32,6 +34,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
+        updateUserIcon()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -55,6 +58,7 @@ class ProfileActivity : AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
+        updateUserIcon()
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
@@ -135,15 +139,17 @@ class ProfileActivity : AppCompatActivity() {
             wr_repository.error = "Невалидный адрес репозитория"
             et_repository.setText("")
         }
-        //if (et_first_name.text.toString() != "" || et_last_name.text.toString() != "") {
-            updateUserIcon()
-        //}
     }
+
     private fun updateUserIcon() {
-        val userIcon = TextDrawable(
-            Utils.toInitials(et_first_name.text.toString(), et_last_name.text.toString()) ?: "",
-            resources.getColor(R.color.color_accent, theme),
-            iv_avatar.width.toFloat(), iv_avatar.height.toFloat())
+        val profile = viewModel.getProfileData().value
+        val color = if (viewModel.getTheme().value == AppCompatDelegate.MODE_NIGHT_YES) {
+            resources.getColor(R.color.color_accent, theme)
+        } else {
+            resources.getColor(R.color.color_accent_night, theme)
+        }
+        val size = 336f
+        val userIcon = TextDrawable(Utils.toInitials(profile?.firstName, profile?.lastName) ?: "", color, size, size)
         iv_avatar.setImageDrawable(userIcon)
     }
 }
