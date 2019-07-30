@@ -9,6 +9,7 @@ import ru.skillbranch.devintensive.R
 import kotlin.math.min
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.toColorInt
+import ru.skillbranch.devintensive.utils.Utils.dp2px
 
 class CircleImageView @JvmOverloads constructor(
     context : Context,
@@ -17,7 +18,7 @@ class CircleImageView @JvmOverloads constructor(
 ) : ImageView(context, attrs, defStyleAttr) {
     companion object {
         private const val DEFAULT_BORDER_COLOR : Int = Color.WHITE
-        private const val DEFAULT_BORDER_WIDTH : Int = 2
+        private const val DEFAULT_BORDER_WIDTH : Int = 2 // dp
     }
 
     private var borderColor : Int = DEFAULT_BORDER_COLOR
@@ -67,6 +68,6 @@ class CircleImageView @JvmOverloads constructor(
         bitmap = drawable.toBitmap(measuredWidth, measuredHeight)
         bitmapShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
         circlePaint.shader = bitmapShader
-        canvas?.drawCircle(halfWidth, halfHeight, radius - borderWidth, circlePaint)
+        canvas?.drawCircle(halfWidth, halfHeight, radius - dp2px(resources, borderWidth), circlePaint)
     }
 }

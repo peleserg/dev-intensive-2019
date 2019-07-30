@@ -12,10 +12,12 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 import android.graphics.*
+import android.util.Log
 import android.util.TypedValue
 import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.utils.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
+import ru.skillbranch.devintensive.utils.Utils.dp2px
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -148,7 +150,7 @@ class ProfileActivity : AppCompatActivity() {
         } else {
             resources.getColor(R.color.color_accent_night, theme)
         }
-        val size = 336f
+        val size = dp2px(iv_avatar.resources, 112)
         val userIcon = TextDrawable(Utils.toInitials(profile?.firstName, profile?.lastName) ?: "", color, size, size)
         iv_avatar.setImageDrawable(userIcon)
     }

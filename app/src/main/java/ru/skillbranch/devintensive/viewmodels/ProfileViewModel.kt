@@ -7,13 +7,6 @@ import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
-// TODO 08
-// **Преобразование Инициалов в Drawable
-// Необходимо реализовать программное преобразование инициалов пользователя в Drawable с цветным фоном и буквами
-// Реализуй программное преобразование инициалов пользователя (если доступны - заполнено хотя бы одно поле) в Drawable
-// с фоном colorAccent (c учетом темы) и буквами инициалов (colorWhite) и установи полученное изображение как
-// изображение по умолчанию для профиля пользователя
-
 class ProfileViewModel : ViewModel() {
     private val repository : PreferencesRepository = PreferencesRepository
     private val profileData = MutableLiveData<Profile>()
@@ -59,10 +52,12 @@ class ProfileViewModel : ViewModel() {
             return false
         }
 
-        val invalidSuffices = setOf("", "enterprise", "features", "topics", "collections", "trending", "events",
+        val invalidSuffices = setOf("enterprise", "features", "topics", "collections", "trending", "events",
             "marketplace", "pricing", "nonprofit", "customer-stories", "security", "login", "join")
-        if (invalidSuffices.contains(suffix)) {
-            return false
+        for (invalidSuffix in invalidSuffices) {
+            if (invalidSuffix in suffix.toLowerCase()) {
+                return false
+            }
         }
 
         if ("/" in suffix) {

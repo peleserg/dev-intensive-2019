@@ -1,5 +1,8 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.res.Resources
+import android.util.TypedValue
+
 object Utils {
     fun parseFullName(fullName : String?) : Pair<String?, String?> {
         val parts : List<String>? = fullName?.split(" ")
@@ -90,5 +93,13 @@ object Utils {
             }
         }
         return result
+    }
+
+    fun dp2px(resource: Resources, dp: Int): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resource.displayMetrics)
+    }
+
+    fun px2dp(resource: Resources, px: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, resource.displayMetrics)
     }
 }
