@@ -5,6 +5,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
 import ru.skillbranch.devintensive.R
 import kotlin.math.min
 import androidx.core.graphics.drawable.toBitmap
@@ -36,9 +37,9 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 
-    fun getBorderWidth() : Int = borderWidth
+    @Dimension fun getBorderWidth() : Int = borderWidth
 
-    fun setBorderWidth(dp : Int) {
+    fun setBorderWidth(@Dimension dp : Int) {
         borderWidth = dp
     }
 

@@ -12,6 +12,8 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 import android.graphics.*
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
 import androidx.appcompat.app.AppCompatDelegate
@@ -88,6 +90,22 @@ class ProfileActivity : AppCompatActivity() {
             viewModel.switchTheme()
             updateUserIcon()
         }
+
+        et_repository.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (!viewModel.repoIsValid(p0.toString())) {
+                    wr_repository.error = "Невалидный адрес репозитория"
+                } else {
+                    wr_repository.error = ""
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -138,7 +156,6 @@ class ProfileActivity : AppCompatActivity() {
             viewModel.saveProfileData(this)
         }
         if (!repoIsValid) {
-            wr_repository.error = "Невалидный адрес репозитория"
             et_repository.setText("")
         }
     }
@@ -150,7 +167,7 @@ class ProfileActivity : AppCompatActivity() {
         } else {
             resources.getColor(R.color.color_accent_night, theme)
         }
-        val size = dp2px(iv_avatar.resources, 112)
+        val size = resources.getDimension(R.dimen.avatar_round_size)
         val userIcon = TextDrawable(Utils.toInitials(profile?.firstName, profile?.lastName) ?: "", color, size, size)
         iv_avatar.setImageDrawable(userIcon)
     }
