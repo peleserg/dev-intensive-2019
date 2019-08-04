@@ -31,7 +31,7 @@ class CircleImageView @JvmOverloads constructor(
     init {
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
-            borderColor = a.getInt(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
+            borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
             borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
             a.recycle()
         }
@@ -63,10 +63,6 @@ class CircleImageView @JvmOverloads constructor(
         val circlePaint = Paint()
         circlePaint.style = Paint.Style.FILL
         circlePaint.isAntiAlias = true
-
-        circlePaint.color = Color.BLACK
-        canvas?.drawRect(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), circlePaint)
-
         circlePaint.color = borderColor
         canvas?.drawCircle(halfWidth, halfHeight, radius, circlePaint)
 
