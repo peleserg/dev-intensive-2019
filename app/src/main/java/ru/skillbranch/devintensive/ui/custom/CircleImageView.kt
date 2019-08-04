@@ -63,6 +63,10 @@ class CircleImageView @JvmOverloads constructor(
         val circlePaint = Paint()
         circlePaint.style = Paint.Style.FILL
         circlePaint.isAntiAlias = true
+
+        circlePaint.color = Color.BLACK
+        canvas?.drawRect(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), circlePaint)
+
         circlePaint.color = borderColor
         canvas?.drawCircle(halfWidth, halfHeight, radius, circlePaint)
 
